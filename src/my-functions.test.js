@@ -16,6 +16,10 @@ describe('calculateSum', () => {
 });
 
 describe('checkIfPrime', () => {
+  it('should return false when number is below 1', () => {
+    expect(checkIfPrime(-200)).toBe(false);
+  });
+
   it('should return true when checking if 2 is prime', () => {
     expect(checkIfPrime(2)).toBe(true);
   });
