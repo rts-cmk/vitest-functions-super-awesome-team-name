@@ -63,6 +63,10 @@ describe("mergeSortedArrays", () => {
 		expect(mergeSortedArrays(["hello", "new"], ["world", "!"])).toEqual(["hello", "new", "world", "!"])
 	})
 
+	it("does the function also not return in the right texting order", () => {
+		expect(mergeSortedArrays(["hello", "new", "world", ","], ["hello", "reader"])).not.toEqual(["hello", "new", "world", ",", "hello", "reader"])
+	})
+
 })
 
 describe("flattenArray", () => {
@@ -79,8 +83,21 @@ describe("flattenArray", () => {
 
 describe("groupBy", () => {
 
+	it("does the function not work when theres nothing in the parames", () => {
+		expect(() => groupBy()).toThrow(TypeError)
+	})
+
 	it("does the function return with anything", () => {
 		expect(groupBy([{ txt: "repairs" }, { txt: "tools" }, { txt: "items" }], "txt")).toBeDefined()
+	})
+
+	it("groups multiple objects with the same key into one array", () => {
+		const input = [{ txt: "repairs", id: 1 }, { txt: "tools", id: 2 }, { txt: "more tools", id: 2 }]
+
+		expect(groupBy(input, "id")).toEqual({
+			1: [{ txt: "repairs", id: 1 }],
+			2: [{ txt: "tools", id: 2 }, { txt: "more tools", id: 2 }]
+		})
 	})
 
 	it("does the returned array equal the expected array", () => {
